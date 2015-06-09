@@ -36,8 +36,23 @@ Create Django models for users (call the model `Rater` so as not to
 confuse it with Django users), movies, and ratings. Make sure that your models
 can contain the data from your dataset.
 
-Create Django admin pages for your models. From the rater page, you should
-be able to see all their ratings and add new ratings. From the movie page,
-you should be able to see all ratings as well.
+Create Django admin pages for your models. 
 
 [movielens]: http://grouplens.org/datasets/movielens/
+
+## Hard Mode
+
+Start adding methods to your models that you will need later. For `movie`,
+you'll want the average rating for each movie, and the ability to get the
+top movies by rating.
+
+For `rater`, you'll want the average rating that rater gave to a movie, and
+the ability to get the top movies that rater has not seen. You will also want
+to be able to find the Euclidean distance between that rater and another using
+their movie ratings. (See [our command-line version of this](https://github.com/tiyd-python-2015-05/movie-recommendations)
+to see more.)
+
+In order to do this, you'll want to [read up on the model layer of Django](https://docs.djangoproject.com/en/1.8/#the-model-layer).
+
+Try to test these new methods. Read [Testing in Django](https://docs.djangoproject.com/en/1.8/topics/testing/)
+and then either look at [django-nose](https://pypi.python.org/pypi/django-nose) or [pytest-django](https://pytest-django.readthedocs.org/en/latest/).
