@@ -1,4 +1,6 @@
 from django.db import models
+from statistics import mean
+
 
 occupations = {0: "Other",
                1: "academic",
@@ -27,15 +29,24 @@ class Rater(models.Model):
     age = models.IntegerField()
     occupation = models.IntegerField()
 
-    def __str__():
+    def __str__(self):
         return "User {}, {}, {}".format(self.pk, self.gender, occupations[self.occupation])
+
+    @property
+    def average_rating(self):
+        return mean([rating.rating for rating in self.rating_set])
 
 class Movie(models.Model):
     title = models.CharField(max_length=255)
     genre = models.CharField(max_length=255)
 
-    def __str__():
+    def __str__(self):
         return self.title
+
+    @property
+    def average_rating(self):
+        return mean([rating.rating for rating in self.rating_set])
+
 
 class Rating(models.Model):
     rater = models.ForeignKey(Rater)
@@ -43,5 +54,5 @@ class Rating(models.Model):
     timestamp = models.DateField()
     rating = models.IntegerField()
 
-    def __str__():
+    def __str__(self):
         return "{} rating for {} is {}".format(self.rater, self.movie, self.rating)
